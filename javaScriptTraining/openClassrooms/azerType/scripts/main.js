@@ -1,6 +1,6 @@
 lancerJeu()
 
-let inputEcriture = document.getElementById("inputEcriture")
+/* let inputEcriture = document.getElementById("inputEcriture")
 console.log(inputEcriture)
 
 let btnValiderMot = document.getElementById("btnValiderMot")
@@ -14,3 +14,4 @@ console.log(zoneScore)
 
 let listeBtnRadio = document.querySelectorAll(".optionSource input")
 console.log(listeBtnRadio)
+ */

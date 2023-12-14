@@ -17,6 +17,21 @@ function afficherEmail(nom, email, score) {
   location.href = mailto
 }
 
+function validerNom(nom) {
+  if (nom.length >= 2) {
+    return true
+  }
+  return false
+}
+
+function validerEmail(email) {
+  let emailRegExp = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+")
+  if (emailRegExp.test(email)) {
+    return true
+  }
+  return false
+}
+
 function lancerJeu() {
 
   // Initialisations
@@ -68,13 +83,17 @@ function lancerJeu() {
 
     let baliseNom = document.getElementById("nom")
     let nom = baliseNom.value
+    validerNom(nom)
 
     let baliseEmail = document.getElementById("email")
     let email = baliseEmail.value
 
-    let scoreEmail = `${score} / ${i}`
-
-    afficherEmail(nom, email, scoreEmail)
+    if (validerNom(nom) && validerEmail(email)) {
+      let scoreEmail = `${score} / ${i}`
+      afficherEmail(nom, email, scoreEmail)
+    } else {
+      console.log("Erreur")
+    }
   })
 
   afficherResultat(score, i)

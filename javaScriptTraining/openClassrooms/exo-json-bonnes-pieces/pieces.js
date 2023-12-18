@@ -32,3 +32,12 @@ for (let i = 0; i < pieces.length; i++) {
   pieceElement.appendChild(descriptionElement);
   pieceElement.appendChild(stockElement);
 }
+
+const buttonTrier = document.querySelector(".btn-trier");
+buttonTrier.addEventListener("click", function() {
+  const piecesOrdonnees = Array.from(pieces);
+  piecesOrdonnees.sort(function(a,b) {
+    return a.prix - b.prix;
+  });
+  console.log(piecesOrdonnees);
+});

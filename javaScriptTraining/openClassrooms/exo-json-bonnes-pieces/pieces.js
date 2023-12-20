@@ -41,3 +41,28 @@ buttonTrier.addEventListener("click", function() {
   });
   console.log(piecesOrdonnees);
 });
+
+const buttonFiltrer = document.querySelector(".btn-filtrer");
+buttonFiltrer.addEventListener("click", function() {
+  const piecesFiltrees = pieces.filter(function(piece) {
+    return piece.prix <= 35;
+  });
+  console.log(piecesFiltrees);
+})
+
+const buttonDecroissant = document.querySelector(".btn-decroissant");
+buttonDecroissant.addEventListener("click", function() {
+  const piecesOrdonnees = Array.from(pieces);
+  piecesOrdonnees.sort(function(a,b) {
+    return b.prix - a.prix;
+  });
+  console.log(piecesOrdonnees);
+});
+
+const buttonNoDesc = document.querySelector(".btn-nodesc");
+buttonNoDesc.addEventListener("click", function() {
+  const piecesFiltrees = pieces.filter(function(piece) {
+    return piece.description
+  });
+  console.log(piecesFiltrees);
+});

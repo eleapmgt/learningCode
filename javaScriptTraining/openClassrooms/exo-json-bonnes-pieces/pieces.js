@@ -1,8 +1,24 @@
-import { ajoutListenersAvis } from "./avis.js";
+import { ajoutListenersAvis, ajoutListenerEnvoyerAvis, afficherAvis } from "./avis.js";
 
-// Récupération des pièces depuis le fichier JSON
-const reponse = await fetch(`http://localhost:8081/pieces`);
-const pieces = await reponse.json();
+// Récupération des pièces éventuellement stockées dans le localStorage
+// let permet à pieces de changer de valeur en fonction du contexte
+let pieces = window.localStorage.getItem("pieces");
+
+if (pieces === null) {
+  // Récupération des pièces depuis l'API
+  // Récupération des pièces depuis le fichier JSON
+  const reponse = await fetch(`http://localhost:8081/pieces`);
+  pieces = await reponse.json();
+  // Transformation des pièces en JSON
+  const valeurPieces = JSON.stringify(pieces);
+  // Stockage des informations dans le localStorage
+  window.localStorage.setItem("pieces", valeurPieces);
+} else {
+  // Si les pièces existent déjà dans localStorage, parse les récupère et convertit en objet JavaScript
+  pieces = JSON.parse(pieces);
+};
+
+ajoutListenerEnvoyerAvis();
 
 function genererPieces(pieces) {
   for (let i = 0; i < pieces.length; i++) {
@@ -46,11 +62,22 @@ function genererPieces(pieces) {
 
 genererPieces(pieces);
 
+for (let i = 0; i < pieces.length; i++) {
+  const id = pieces[i].id;
+  const avisJSON = window.localStorage.getItem(`avis-piece-${id}`);
+  const avis = JSON.parse(avisJSON);
+
+  if (avis !== null) {
+    const pieceElement = document.querySelector(`article[data-id="${id}"]`);
+    afficherAvis(pieceElement, avis);
+  };
+};
+
 // Gestion des boutons
 const buttonTrier = document.querySelector(".btn-trier");
-buttonTrier.addEventListener("click", function() {
+buttonTrier.addEventListener("click", function () {
   const piecesOrdonnees = Array.from(pieces);
-  piecesOrdonnees.sort(function(a,b) {
+  piecesOrdonnees.sort(function (a, b) {
     return a.prix - b.prix;
   });
   document.querySelector(".fiches").innerHTML = "";
@@ -58,8 +85,8 @@ buttonTrier.addEventListener("click", function() {
 });
 
 const buttonFiltrer = document.querySelector(".btn-filtrer");
-buttonFiltrer.addEventListener("click", function() {
-  const piecesFiltrees = pieces.filter(function(piece) {
+buttonFiltrer.addEventListener("click", function () {
+  const piecesFiltrees = pieces.filter(function (piece) {
     return piece.prix <= 35;
   });
   document.querySelector(".fiches").innerHTML = "";
@@ -67,9 +94,9 @@ buttonFiltrer.addEventListener("click", function() {
 })
 
 const buttonDecroissant = document.querySelector(".btn-decroissant");
-buttonDecroissant.addEventListener("click", function() {
+buttonDecroissant.addEventListener("click", function () {
   const piecesOrdonnees = Array.from(pieces);
-  piecesOrdonnees.sort(function(a,b) {
+  piecesOrdonnees.sort(function (a, b) {
     return b.prix - a.prix;
   });
   document.querySelector(".fiches").innerHTML = "";
@@ -77,8 +104,8 @@ buttonDecroissant.addEventListener("click", function() {
 });
 
 const buttonNoDesc = document.querySelector(".btn-nodesc");
-buttonNoDesc.addEventListener("click", function() {
-  const piecesFiltrees = pieces.filter(function(piece) {
+buttonNoDesc.addEventListener("click", function () {
+  const piecesFiltrees = pieces.filter(function (piece) {
     return piece.description
   });
   document.querySelector(".fiches").innerHTML = "";
@@ -86,7 +113,7 @@ buttonNoDesc.addEventListener("click", function() {
 });
 
 const noms = pieces.map(piece => piece.nom);
-for (let i = pieces.length - 1; i >=0; i--) {
+for (let i = pieces.length - 1; i >= 0; i--) {
   if (pieces[i].prix > 35) {
     noms.splice(i, 1);
   };
@@ -130,10 +157,16 @@ pElementDisponible.innerText = "Pièces disponibles :";
 document.querySelector(".disponibles").appendChild(pElementDisponible).appendChild(disponiblesElements);
 
 const inputPrixMax = document.querySelector("#prix-max");
-inputPrixMax.addEventListener("input", function() {
-  const piecesFiltrees = pieces.filter(function(piece) {
+inputPrixMax.addEventListener("input", function () {
+  const piecesFiltrees = pieces.filter(function (piece) {
     return piece.prix <= inputPrixMax.value;
   })
   document.querySelector(".fiches").innerHTML = "";
   genererPieces(piecesFiltrees);
+});
+
+// Ajout du listener pour mettre à jour les données du localStorage
+const buttonMAJ = document.querySelector(".btn-maj");
+buttonMAJ.addEventListener("click", function () {
+  window.localStorage.removeItem("pieces");
 });

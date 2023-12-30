@@ -1,4 +1,4 @@
-import { ajoutListenersAvis, ajoutListenerEnvoyerAvis, afficherAvis } from "./avis.js";
+import { ajoutListenersAvis, ajoutListenerEnvoyerAvis, afficherAvis, afficherGraphiqueAvis } from "./avis.js";
 
 // Récupération des pièces éventuellement stockées dans le localStorage
 // let permet à pieces de changer de valeur en fonction du contexte
@@ -7,7 +7,7 @@ let pieces = window.localStorage.getItem("pieces");
 if (pieces === null) {
   // Récupération des pièces depuis l'API
   // Récupération des pièces depuis le fichier JSON
-  const reponse = await fetch(`http://localhost:8081/pieces`);
+  const reponse = await fetch(`http://localhost:8081/pieces/`);
   pieces = await reponse.json();
   // Transformation des pièces en JSON
   const valeurPieces = JSON.stringify(pieces);
@@ -170,3 +170,5 @@ const buttonMAJ = document.querySelector(".btn-maj");
 buttonMAJ.addEventListener("click", function () {
   window.localStorage.removeItem("pieces");
 });
+
+await afficherGraphiqueAvis();

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="#">
+  <title>Document</title>
+  <script>
+
+    // Créez un système de recommandation qui conseille le bon film en fonction de l'âge de l'utilisateur.
+    // Si user <= 13 ans, on affiche Lilo & Stitch.
+    // Si user entre 13 et 18 ans, on affiche Matrix.
+    // Si user >= 18 ans, on affiche Evil Dead.
+    // Pour demander l'âge, on utilise const age = prompt("Quel est votre âge ?")
+
+    // On commencera avec le code suivant :
+    const currentYear = 2022
+    const birthyear = prompt('Quel est votre année de naissance ?')
+
+    // Ecrire votre code ici, afficher le film à l'aide de console.log('votre réponse')
+    const age = currentYear - birthyear
+
+    if (age <= 13) {
+      console.log("Lilo & Stitch");
+    } else if (age < 18) {
+      console.log("Matrix");
+    } else {
+      console.log("Evil Dead");
+    }
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

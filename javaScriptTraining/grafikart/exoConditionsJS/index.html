@@ -8,6 +8,8 @@
   <title>Document</title>
   <script>
 
+    // EXERCICE 1 - Système de recommandation
+
     // Créez un système de recommandation qui conseille le bon film en fonction de l'âge de l'utilisateur.
     // Si user <= 13 ans, on affiche Lilo & Stitch.
     // Si user entre 13 et 18 ans, on affiche Matrix.
@@ -15,11 +17,11 @@
     // Pour demander l'âge, on utilise const age = prompt("Quel est votre âge ?")
 
     // On commencera avec le code suivant :
-    const currentYear = 2022
-    const birthyear = prompt('Quel est votre année de naissance ?')
+    const currentYear = 2022;
+    const birthyear = prompt('Quel est votre année de naissance ?');
 
     // Ecrire votre code ici, afficher le film à l'aide de console.log('votre réponse')
-    const age = currentYear - birthyear
+    const age = currentYear - birthyear;
 
     if (age <= 13) {
       console.log("Lilo & Stitch");
@@ -28,6 +30,32 @@
     } else {
       console.log("Evil Dead");
     }
+
+    //
+    //
+    //
+
+    // EXERCICE 2 - Multiplication
+
+    // On souhaite créer une calculatrice simplifiée, capable de multiplier 2 nombres et de donner le signe du résultat.
+    // L'objectif est d'afficher nombre1*nombre2 = resultat est positif.
+
+    // On commencera avec la base suivante :
+    const a = prompt('Entrez un premier nombre');
+    const b = prompt('Entrez un second nombre');
+    const resultat = a * b;
+    let signe
+
+    if(isNaN(resultat)) {
+      console.log(`Opération ${a}x${b} impossible.`);
+    } else {
+      if (resultat >= 0) {
+        signe = "positif";
+      } else {
+        signe = "négatif";
+      };
+    };
+    console.log(`${a}x${b}=${resultat} est ${signe}.`);
 
   </script>
 </head>

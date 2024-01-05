@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="#">
+  <title>Document</title>
+  <script>
+
+    // EXERCICE 1 - Décompte
+
+    // Demander à l'utilisateur à l'aide de prompt un nombre entre 0 et 10.
+    // Afficher tous les nombres sous le nombre indiqué par l'utilisateur (s'il rentre 2, on affichera 2, 1, 0).
+    // Si l'utilisateur rentre un chiffre erroné, on affichera un message d'erreur.
+
+    let chiffre = prompt("Entrez un nombre entre 0 et 10.")
+    if (chiffre < 0 || chiffre > 10) {
+      console.log("Le nombre n'est pas compris entre 0 et 10.")
+    } else {
+      for (let i = chiffre; i >= 0; i--) {
+        console.log(i);
+      };
+    };
+
+    //
+    //
+    //
+
+    // EXERCICE 2 - Décompte
+
+    // On crée une variable guess qui contient un nombre entre 0 et 10. L'objectif est de faire deviner ce nombre à l'utilisateur.
+    // Si l'utilisateur se trompe, on lui donne une indication "plus" ou "moins" pour l'orienter vers la bonne réponse.
+
+    let guess = 8;
+    let nombre
+
+    while (nombre !== guess) {
+      nombre = prompt("Votre nombre :") * 1;
+      if (nombre < guess) {
+        console.log("Plus !");
+      } else if (chiffre > guess) {
+        console.log("Moins !");
+      }
+    }
+    console.log("Bravo ! Vous avez deviné.");
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

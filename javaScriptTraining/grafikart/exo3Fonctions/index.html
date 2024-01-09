@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="#">
+  <title>Document</title>
+  <script>
+
+    // EXERCICE 1 - Deviner le nombre
+
+    // On crée un nombre aléatoire entre 0 et 10.
+    // On demande à l'utilisateur de deviner ce nombre avec 3 essais.
+    // Pour créer la logique, on utilisera 2 fonctions spécifiques : la fonction isRight(n) qui renverra un booléen si l'utilisateur a la bonne réponse ou pas, et une fonction guess() qui permet de faire un essai et renverra true ou false en fonction de la réponse donnée.
+
+    // Début du code :
+
+    const solution = Math.floor(Math.random() * 11);
+
+    function isRight(n) {
+      return solution === n;
+    };
+
+    function guess() {
+        const reponse = prompt("Choisis un nombre entre 0 et 10.") * 1;
+        return isRight(reponse);
+    };
+
+    for(let i = 0; i < 3; i++) {
+      if (guess()) {
+        console.log("Bravo");
+        break;
+      } else if (i === 2) {
+        console.log("Tu as perdu !");
+      };
+    };
+
+    //
+    //
+    //
+
+    // EXERCICE 2 - Les nombres premiers
+
+    // Créer une fonction isPremier() qui permet d'indiquer si un nombre est premier.
+
+    function isPremier(n) {
+      if (n < 2) {
+        return false;
+      };
+      // On parcourt tous les nombres de n jusqu'à 2 dans la variable i.
+      for(let i = n - 1 ; i > 1 ; i--) {
+        // On regarde si le nombre est divisible par i.
+        if (n % i === 0) {
+          return false;
+        };
+      };
+      return true;
+    };
+
+    console.log('0', isPremier(0)) // false
+    console.log('1', isPremier(1)) // false
+    console.log('2', isPremier(2)) // true
+    console.log('3', isPremier(3)) // true
+    console.log('11', isPremier(11)) // true
+    console.log('12', isPremier(12)) // false
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

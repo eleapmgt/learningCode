@@ -155,11 +155,42 @@
     // Dans un 1er temps, on veut obtenir un objet qui contiendra en propriété le mot, et en valeur le nombre d'occurences ({bonjour: 3, maison: 2}).
     // Pour cet exercice, on nettoiera la chaine en retirant les caractères qui ne sont pas des mots (,?:...) avec la fonction replaceAll.
     // On aura besoin de mettre la phrase en minuscule avec la fonction toLowerCase.
-    // Puis ont ajoutera de la logique pour extraire le top 3 des mots les plus utilisés dans la phrase.
+    // Puis on ajoutera de la logique pour extraire le top 3 des mots les plus utilisés dans la phrase.
+    // Eliminez ensuite les mots qui font moins de 4 caractères.
 
     const phrase = `Vous savez, moi je ne crois pas qu’il y ait de bonne ou de mauvaise situation. Moi, si je devais résumer ma vie aujourd’hui avec vous, je dirais que c’est d’abord des rencontres.`
 
+    const frequencies = {};
 
+    const ignored = [",", "?", "!", ".", ":", "...", "«", "»"];
+    let cleanedPhrase = phrase.toLowerCase();
+    for(character of ignored) {
+      cleanedPhrase = cleanedPhrase.replaceAll(character, "");
+    };
+
+    const words = cleanedPhrase.split(" ")
+
+    for(let word of words) {
+      if(word !== "" && word.length >= 4) {
+        if(frequencies[word]) {
+          frequencies[word]++
+        } else {
+          frequencies[word] = 1
+        };
+      };
+    };
+
+    const frequenciesArray=[];
+    for(k in frequencies) {
+      frequenciesArray.push({
+        word: k,
+        count: frequencies[k]
+      })
+    };
+
+    frequenciesArray.sort((a, b) => b.count - a.count);
+
+    console.log(`Les 3 mots les plus fréquents sont "${frequenciesArray[0].word}" (${frequenciesArray[0].count}), "${frequenciesArray[1].word}" (${frequenciesArray[1].count}) et "${frequenciesArray[2].word}" (${frequenciesArray[2].count}).`);
 
   </script>
 </head>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="#">
+  <title>Document</title>
+  <script>
+
+/*     const moyenne = (notes) => {
+      let sum = 0;
+      for (let note of notes) {
+        sum += note;
+      }
+      return sum / notes.length;
+    };
+
+    class Student {
+      ecole = "Jules Ferry";
+      _notes = [];
+
+      constructor (firstname, lastname) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+      };
+
+      set notes (v) {
+        if (Array.isArray(v)) {
+          this._notes = v;
+        };
+      };
+
+      get name () {
+        return `${this.firstname} ${this.lastname}`;
+      };
+
+      canPass () {
+        return moyenne(this.notes) >= Student.moyenne;
+      };
+
+      static moyenne = 10;
+
+    };
+
+    class SuperStudent extends Student {
+
+      constructor (firstname, lastname, notes) {
+        super(firstname, lastname);
+        this._notes = notes;
+      };
+
+      get name () {
+        return "Super " + super.name;
+      };
+
+      canPass () {
+        return true;
+      };
+    };
+
+    const john = new SuperStudent("John", "Doe", [0, 10, 8]);
+    const jane = new Student("Jane", "Doe");
+    jane.notes = [15, 18, 19];
+    console.log(john.name); */
+
+    // EXERCICE 1 - Géométrie
+
+    // Notre code JS va être utilisé dans un outil de dessin. On a besoin de classes pour représenter nos formes géométriques (rectangle et carré).
+    // Le rectangle sera construit à l'aide de 2 informations : largeur et hauteur.
+    // Le carré ne sera construit qu'avec une seule dimension et sera l'extension du rectangle.
+
+    class Rectangle {
+      constructor (width, height) {
+        this.width = width;
+        this.height = height;
+      };
+
+      get perimeter () {
+        return (this.width + this.height) * 2;
+      };
+
+      get isValid () {
+        return this.width > 0 && this.height > 0;
+      };
+
+      isBiggerThan (shape) {
+        return this.perimeter > shape.perimeter;
+      };
+    };
+
+    class Square extends Rectangle {
+      constructor (width) {
+        super(width, width);
+      };
+    }
+
+    // Code qu'il faut faire fonctionner :
+    const r = new Rectangle(10, 20);
+    console.log(r.perimeter) // 60
+    console.log(r.isValid) // true
+    const r2 = new Rectangle(-10, 20);
+    console.log(r2.isValid) // false
+    const c = new Square(10);
+    console.log(c.perimeter) // 40
+    console.log(r.isBiggerThan(c)) // true
+
+    //
+    //
+    //
+
+    // EXERCICE 2 - Bibliothécaire
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>

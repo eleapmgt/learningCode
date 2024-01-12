@@ -70,8 +70,13 @@
     // Le rectangle sera construit à l'aide de 2 informations : largeur et hauteur.
     // Le carré ne sera construit qu'avec une seule dimension et sera l'extension du rectangle.
 
+    // Rajouter une erreur : si la largeur ou la hauteur est négative, ce n'est pas bon.
+
     class Rectangle {
       constructor (width, height) {
+        if (width <= 0 || height <= 0) {
+          throw new Error ("Impossible d'avoir une forme géométrique avec des dimensions négatives.");
+        };
         this.width = width;
         this.height = height;
       };
@@ -95,12 +100,27 @@
       };
     }
 
+    function promptRectangle () {
+      try {
+        const width = prompt("Largeur") * 1;
+        const height = parseInt(prompt("Largeur"), 10);
+        const r3 = new Rectangle(width, height);
+        return r3;
+      } catch (err) {
+        throw new Error("Entrée utilisateur invalide.", {cause: {code: 404, url: "https://grafikart.fr"}});
+      };
+    };
+
+    try {
+      promptRectangle();
+    } catch (err) {
+      console.log(err.message, {err});
+    };
+
     // Code qu'il faut faire fonctionner :
     const r = new Rectangle(10, 20);
     console.log(r.perimeter) // 60
     console.log(r.isValid) // true
-    const r2 = new Rectangle(-10, 20);
-    console.log(r2.isValid) // false
     const c = new Square(10);
     console.log(c.perimeter) // 40
     console.log(r.isBiggerThan(c)) // true
@@ -110,6 +130,83 @@
     //
 
     // EXERCICE 2 - Bibliothécaire
+
+    // On cherche à gérer une bibliothèque de livres.
+    // On commencera par créer une classe permettant de représenter un livre (on construira l'objet avec un titre et un nombre de pages).
+
+    // On aura plusieurs propriétés/méthodes utiles :
+    // *page, renverra la page courante du livre (1 par défaut),
+    // *nextPage(), permettra de tourner la page et incrémentera la page courante,
+    // close(), permettra de fermer un livre (revenir à la 1ère page).
+
+    // Ensuite, on créera une classe Library pour organiser nos livres.
+    // *addBook(), permettra de rajouter un livre à la bibliothèque,
+    // *addBooks([]), permettra de rajouter plusieurs livres d'un coup (on lui passera un tableau),
+    // *findBooksByLetter('s'), permettra de lister tous les livres ayant un titre commençant par la lettre indiquée.
+
+    class Book {
+
+      #page = 1;
+
+      constructor (title, pages) {
+        this.title = title;
+        this.pages = pages;
+      };
+
+
+      get page () {
+        return this.#page;
+      };
+
+      nextPage () {
+        if (this.#page < this.pages) {
+          this.#page++
+        };
+      };
+
+      close () {
+        this.#page = 1;
+      };
+    };
+
+    class Library {
+
+      #books = [];
+
+      addBook (book) {
+        this.#books.push(book);
+      };
+
+      addBooks (books) {
+        books.forEach(this.addBook, this);
+        // Autre manière de l'écrire :
+        // for(let book of books) {
+          // this.addBook(book)
+        // };
+      };
+
+      findBooksByLetter (letter) {
+        return this.#books.filter((book) => book.title[0].toLowerCase() === letter.toLowerCase());
+      };
+    };
+
+    // Code qu'on fera fonctionner :
+    const b = new Book('Seigneur des anneaux', 200);
+    console.log(b.page)
+    b.nextPage()
+    console.log(b.page)
+    b.close()
+    console.log(b.page)
+
+    const l = new Library()
+    l.addBook(b)
+    l.addBooks([
+        new Book('Ready player one', 100),
+        new Book('Oui-oui', 10),
+        new Book('Sillage', 50),
+    ])
+    console.log(l.findBooksByLetter('S'))
+
 
   </script>
 </head>

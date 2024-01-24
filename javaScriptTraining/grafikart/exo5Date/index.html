@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="#">
+  <title>Document</title>
+  <script>
+
+    // EXERCICE 1 - addDays()
+
+    // Créer une fonction qui permet d'ajouter un certain nombre de jours à une date.
+
+    function addDays(date, days) {
+      const newDate = new Date(date.getTime());
+      newDate.setDate(newDate.getDate() + days);
+      return newDate;
+    };
+
+    // Code à faire fonctionner :
+    const today = new Date();
+    const tomorrow = addDays(today, 1);
+    console.log(today, tomorrow);
+
+    //
+    //
+    //
+
+    // EXERCICE 2 - addInterval()
+
+    // Créer une fonction qui permet d'ajouter à la fois des jours, des heures, des minutes... à une date.
+
+    const YEARS = 0;
+    const MONTHS = 1;
+    const DAYS = 2;
+    const HOURS = 3;
+    const MINUTES = 4;
+    const SECONDS = 5;
+
+    function addInterval(date, interval) {
+      const parts = [
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate(),
+        date.getHours(),
+        date.getSeconds(),
+        date.getMilliseconds()
+      ];
+      for (const [unit, value] of Object.entries(interval)) {
+        parts[unit] += value;
+      };
+      return new Date(...parts);
+    };
+
+    // Code à faire fonctionner :
+    const today2 = new Date();
+    const future = addInterval(today, {
+        [MONTHS]: 2,
+        [DAYS]: 1,
+        [MINUTES]: 3,
+    })
+    console.log(today2, future);
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>
